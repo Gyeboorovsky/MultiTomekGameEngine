@@ -1,8 +1,8 @@
 package engine.common.units;
 
 public class Point2 {
-    float x;
-    float y;
+    public float x;
+    public float y;
 
     public Point2(float x, float y) {
         this.x = x;

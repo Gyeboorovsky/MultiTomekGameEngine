@@ -5,6 +5,8 @@ import org.lwjgl.system.MemoryStack;
 
 import java.nio.IntBuffer;
 
+import static engine.TemporaryConfig.windowHeight;
+import static engine.TemporaryConfig.windowWidth;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.glfw.GLFW.GLFW_TRUE;
 import static org.lwjgl.system.MemoryStack.stackPush;
@@ -29,7 +31,7 @@ public class Window {
         if ( windowId != NULL)
             throw new RuntimeException("Window is already created");
 
-        windowId = glfwCreateWindow(300, 300, "Hellow World!", NULL, NULL);
+        windowId = glfwCreateWindow(windowWidth, windowHeight, "Hellow World!", NULL, NULL);
 
         if ( windowId == NULL )
             throw new RuntimeException("Failed to create the GLFW window");

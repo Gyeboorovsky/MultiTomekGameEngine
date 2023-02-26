@@ -1,12 +1,16 @@
 package demoPlayground;
 
+import engine.common.models.GameObject;
+import engine.common.units.Point2;
 import engine.graphic.Window;
-import engine.graphic.polygon.Polygon.Polygon;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 
-import static engine.input.InputConfig.keyCallbackConfig;
+import static demoPlayground.Input.keyCallbackConfig;
+import static engine.TemporaryConfig.windowHeight;
+import static engine.common.models.Player.initializePlayer;
+import static engine.common.models.Player.renderPlayer;
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.glfw.GLFW.glfwPollEvents;
@@ -65,26 +69,23 @@ public class Game {
         glClearColor(0.5f, 0.0f, 0.0f, 0.5f);
 
 
+        //GameObject object = new GameObject(new Point2(0, 0));
+        initializePlayer();
 
-
-        Polygon kwadrat = new Polygon();
-        kwadrat.addPoint(-0.5f, -0.5f);
-        kwadrat.addPoint(0.5f, -0.5f);
-        kwadrat.addPoint(0.5f, 0.5f);
-        kwadrat.addPoint(-0.5f, 0.5f);
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
+        int frames = 0;
+        long startTime = System.currentTimeMillis();
         while ( !glfwWindowShouldClose(windowId) ) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
-
-            //--------------------
-
-            kwadrat.render();
+            glViewport(0,0, windowHeight, windowHeight);
 
 
-            //---------------------
+            renderPlayer();
 
-            glfwSwapBuffers(windowId); // swap the color buffers
+
+            // swap the color buffers
+            glfwSwapBuffers(windowId);
 
             // Poll for window events. The key callback above will only be
             // invoked during this call.
